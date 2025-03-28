@@ -1,12 +1,17 @@
 package jellyfin
 
-type session []struct {
+import "time"
+
+type session struct {
+	LastActivityDate    time.Time `json:"LastActivityDate"`
+	LastPlaybackCheckIn time.Time `json:"LastPlaybackCheckIn"`
+	NowPlayingItem      *struct {
+		ID string `json:"Id"`
+	} `json:"NowPlayingItem,omitempty"`
 	PlayState struct {
-		IsPaused   bool   `json:"IsPaused"`
-		PlayMethod string `json:"PlayMethod"`
-	} `json:"PlayState,omitempty"`
+		IsPaused bool `json:"IsPaused"`
+	} `json:"PlayState"`
 	UserName string `json:"UserName"`
-	IsActive bool   `json:"IsActive"`
 }
 
 type mediaCounts struct {
